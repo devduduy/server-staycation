@@ -1,0 +1,78 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4 mt-1">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12 col-lg-4 mb-sm-4 mb-lg-0">
+        <img
+          src="http://localhost:3001/<%= booking.payments.proofPayment %>"
+          alt="imageBooking"
+          style="width: 100%; display: block;"
+        />
+        <div class="row ml-3 mt-3">
+          <% if ( booking.payments.status == 'Proses' ) { %>
+          <form
+            action="/admin/booking/<%= booking.id %>/reject?_method=PUT"
+            method="POST"
+          >
+            <button
+              type="submit"
+              class="btn btn-danger btn-sm mr-2"
+              onclick="return confirm('Are you sure to reject ?');"
+            >
+              <i class="fas fa-times"></i>
+              Reject
+            </button>
+          </form>
+          <form
+            action="/admin/booking/<%= booking.id %>/confirmation?_method=PUT"
+            method="POST"
+          >
+            <button
+              type="submit"
+              class="btn btn-success btn-sm"
+              onclick="return confirm('Are you sure to confirmation ?');"
+            >
+              <i class="fas fa-check"></i>
+              Confirmation
+            </button>
+          </form>
+          <% } %>
+        </div>
+      </div>
+      <div class="col-12 col-lg-8">
+        <div class="table-responsive">
+          <table
+            class="table table-bordered"
+            id="dataTableActivity"
+            width="100%"
+            cellspacing="0"
+          >
+            <thead>
+              <tr>
+                <th>Name Member</th>
+                <th>Total</th>
+                <th>Bank From</th>
+                <th>Title</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <%= booking.memberId.firstName %> <%=
+                  booking.memberId.lastName %>
+                </td>
+                <td><%= booking.total %></td>
+                <td><%= booking.payments.bankFrom %></td>
+                <td><%= booking.itemId.title %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="/admin/booking" class="btn btn-secondary"
+  ><i class="fas fa-backward"> Back</i></a
+>
